@@ -7,7 +7,8 @@ function App() {
   return (
     <BrowserRouter future={{v7_startTransition: true, v7_relativeSplatPath: true}}>
       <UtilsProvider>
-        <PublicRoutes />
+        {!isAuth && <PublicRoutes />}
+        {isAuth && <PrivateRoutes />}
       </UtilsProvider>
     </BrowserRouter>
   )

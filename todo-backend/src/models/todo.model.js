@@ -13,7 +13,7 @@ const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: String,
   completed: { type: Boolean, default: false },
-  // user_id: { type: Number, required: true },
+  // user_id: usar un Objet() id de mongo,
   user_id: { type: Number, required: true },
   created_at: Date,
   updated_at: Date

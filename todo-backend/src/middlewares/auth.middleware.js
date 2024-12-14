@@ -10,10 +10,6 @@ const tokenAuth = (req, res, next) => {
 
   const token = req.headers.authorization?.split(' ')[1];
 
-  // let response = await fetch('https://example.com/path', {method:'GET', 
-  //   headers: {'Authorization': 'Bearer ' + YOUR_TOKEN }});
-  //   let data = await response.json();
-  //   console.log(data);
 
   if (!token) {
     return errorResponseGenerator({

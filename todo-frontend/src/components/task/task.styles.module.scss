@@ -1,0 +1,72 @@
+@import '../../assets/styles/_vars';
+
+@mixin taskDefault($fd, $c, $bgc, $bsc) {
+  @include display-flex-center();
+  flex-direction: $fd;
+  color: $c;
+  background-color: $bgc;
+  box-shadow: 0 0 10px 5px $bsc;
+
+  list-style: none;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  gap: 1rem;
+  width: 100%;
+  min-width: 50vw;
+  max-width: 1000px;
+}
+
+.task {
+  @include taskDefault(column, $primary-color, #000000cc, $primary-color);
+  transition: 1000ms;
+};
+
+.taskCompleted {
+  @include taskDefault(column, #00000088, #00000044, $secondary-color);
+  transition: 1000ms;
+
+  
+  h3, p, span {
+    text-decoration: line-through;
+  };
+
+  button {
+    filter: opacity(0.5)
+  };
+};
+
+.taskHeader {
+  @include display-flex-center();
+  width: 100%;
+  justify-content: space-between;
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+};
+
+.taskBody {
+  @include display-flex-center();
+  flex-direction: column;
+  gap: 1.5rem;
+};
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #ffffff33;
+
+  font: inherit;
+  color: $primary-color;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-radius: 0.2rem;
+}
+
+input[type="checkbox"]:checked {
+  color: $secondary-color;
+  background-color: $secondary-color;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}

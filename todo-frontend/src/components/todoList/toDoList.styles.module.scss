@@ -1,0 +1,13 @@
+@import '../../assets/styles/_vars';
+
+.taskListContainer {
+  background-color: transparent;;
+}
+
+.taskList {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}

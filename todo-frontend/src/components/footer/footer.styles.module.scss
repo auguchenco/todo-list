@@ -1,0 +1,13 @@
+@import '../../assets/styles/_vars';
+
+.footer {
+  background-color: #000;
+  color: $primary-color;
+  width: 100vw;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  padding: 0.25rem;
+  z-index: 1;
+  box-shadow: 0 0 10px 5px #000;
+}

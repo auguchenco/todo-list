@@ -1,0 +1,6 @@
+@import '../../assets/styles/_vars';
+
+.main {
+  @include display-flex-center();
+  
+};

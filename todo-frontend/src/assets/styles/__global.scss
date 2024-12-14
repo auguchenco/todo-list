@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import './_vars';
+
+#root {
+  display: flex;
+  flex-direction: column;
+};
+
+body {
+  font-family: 'Roboto', Verdana, Geneva, Tahoma, sans-serif;
+  background-image: url('../img/background-image.jpg');
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed;
+};
+
+main {
+  background-color: transparent;
+  position: relative;
+  top: 5.2rem;
+  flex: 1 1 (100vh - 20vh);
+  padding: 2rem 2rem 3rem 2rem;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+};
+
+a:hover {
+  color: $secondary-color;
+};
+
+button {
+  font-size: 1rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #333;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  @include display-flex-center();
+};
+
+button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 10px $secondary-color;
+};
+
+button:active {
+  background-color: #666;
+  border: 1px solid $secondary-color;
+  text-shadow: 0 0 5px $primary-color;
+};
+
+input[type="text"] {
+  background-color: $primary-color;
+  height: 2.1rem;
+  border-radius: 0.5rem;
+  padding: 0 0.5rem;
+  width: 25vw;
+  transition: 1000ms;
+};
+
+input[type="text"]:hover {
+  background-color: $tertiary-color;
+  transition: 1000ms;
+}
+
+input[type="text"]:focus-visible {
+  outline-offset: 0px;
+  outline: none;
+  background-color: $secondary-color;
+  box-shadow: 0 0 10px $secondary-color;
+  transition: 1000ms;
+};

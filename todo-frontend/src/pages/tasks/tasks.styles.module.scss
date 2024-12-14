@@ -1,0 +1,10 @@
+@import '../../assets/styles/_vars';
+
+.taskList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: space-around;
+  gap: 2rem;
+};

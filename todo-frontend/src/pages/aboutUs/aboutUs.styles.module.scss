@@ -1,0 +1,36 @@
+@import '../../assets/styles/_vars';
+
+.container {
+  background-color: $transparent-background-color;
+  padding: 2rem;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  h2 {
+    text-align: center;
+    color: $primary-color;
+    font-size: 2rem;
+  };
+
+  h4 {
+    text-align: left;
+    color: $secondary-color;
+    font-size: 1.5rem;
+  };
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  };
+
+  ul > li {
+    list-style-type: disc;
+    margin-left: 2rem;
+    color: $tertiary-color;
+    font-size: 1rem;
+  };
+
+};

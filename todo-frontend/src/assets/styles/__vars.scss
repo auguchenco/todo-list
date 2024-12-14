@@ -1,0 +1,12 @@
+$primary-color: #0fd;
+$secondary-color: #f0d;
+$tertiary-color: #fd0;
+
+$transparent-background-color: #000000dd;
+
+
+@mixin display-flex-center(){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+};

@@ -1,0 +1,39 @@
+{
+  "todos": [
+    {
+      "name": "🛒 Buy groceriess",
+      "description": "🥛 Milk, 🍞 Bread, 🥚 Eggs, and 🍏 Fruits",
+      "creator": "Alice",
+      "id": "1",
+      "isCompleted": false
+    },
+    {
+      "name": "📊 Finish project report",
+      "description": "📝 Complete the final report for the project.",
+      "creator": "Bob",
+      "id": "2",
+      "isCompleted": true
+    },
+    {
+      "name": "🏥 Schedule doctor appointment",
+      "description": "👨‍⚕️ Annual check-up with Dr. Smith.",
+      "creator": "Charlie",
+      "id": "3",
+      "isCompleted": true
+    },
+    {
+      "id": "4",
+      "name": "🧹 Clean the house",
+      "isCompleted": true,
+      "description": "🧼 Vacuum, dust, and organize the living room.",
+      "creator": "Diana"
+    },
+    {
+      "name": "📖 Read a book",
+      "description": "📚 Finish reading 'The Great Gatsby'.",
+      "creator": "Ethan",
+      "id": "5",
+      "isCompleted": false
+    }
+  ]
+}

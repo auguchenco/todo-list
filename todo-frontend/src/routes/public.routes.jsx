@@ -9,7 +9,7 @@ const PublicRoutes = () => {
     <Routes>
       <Route index path="/" element={<Home />} />
       {!state.token && <Route index path="/log-in" element={<LogIn />} />}
-      <Route path="/*" element={<Home />} />
+      {!state.token && <Route path="/*" element={<Home />} />}
     </Routes>
   );
 };

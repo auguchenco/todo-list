@@ -1,4 +1,3 @@
-import styles from "./addTask.styles.module.scss";
 import { useUtils } from "../../context/Utils";
 
 import axios from "axios";
@@ -27,6 +26,7 @@ const AddTask = () => {
           },
         }
       );
+
       dispatch({ type: "setTodoList" });
       console.log(data);
     } catch (error) {

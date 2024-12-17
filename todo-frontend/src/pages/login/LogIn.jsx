@@ -2,86 +2,86 @@ import DefaultPage from "../../components/defaultPage/DefaultPage";
 import { useUtils } from "../../context/Utils";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import styles from "./login.styles.module.scss";
-import axios from "axios";
+import Form from "../../components/form/Form";
 
-const URL = "http://localhost:3000/auth";
 const LogIn = () => {
   const { dispatch, state } = useUtils();
   const navigate = useNavigate();
   const [submitLogIn, setSubmitLogIn] = useState(true);
 
-  const auth = async (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
-    const user = {};
-    formData.forEach((value, key) => {
-      user[key] = value;
-    });
-    try {
-      const url = submitLogIn ? URL + "/login" : URL + "/register";
-      const { data } = await axios.post(url, user);
-      if (submitLogIn) {
-        dispatch({
-          type: "setToken",
-          payload: {
-            user: data.data.user,
-            token: data.data.token,
-          },
-        });
-        form.reset();
-        navigate(`/${data.data.user.username}`);
-        // dispatch({ type: "setTodoList" });
-      } else {
-        form.reset();
+  const handleRequestData = (URL, result) => {
+    const req = {
+      url: submitLogIn ? URL + "/auth/login" : URL + "/auth/register",
+      data: result,
+    };
+    const func = {
+      tFunc: (form, data) => {
+        if (submitLogIn) {
+          dispatch({
+            type: "setToken",
+            payload: {
+              user: data.user,
+              token: data.token,
+            },
+          });
+          form.reset();
+          console.log(state);
+          console.log(data);
+          navigate(`/${data.user.username}`);
+          // dispatch({ type: "setTodoList" });
+        } else {
+          form.reset();
+        }
+      },
+      eFunc: (form) => {
+        if (submitLogIn) {
+          dispatch({ type: "deleteToken" });
+          form.reset();
+        }
+      },
+      fFunc: () => {
         navigate(`/`);
-      };
-
-    } catch (error) {
-      console.error(error);
-      if (submitLogIn) {
-        dispatch({ type: "deleteToken" });
-        form.reset();
-        navigate(`/`);
-      }
-    }
-    form.reset();
-    // navigate(`/`);
+      },
+    };
+    return { req, func };
   };
+
+  const components = {
+    inputs: [
+      {
+        type: "text",
+        id: "username",
+        placeholder: "john.rambo",
+        text: "Username",
+      },
+      {
+        type: "password",
+        id: "password",
+        placeholder: "",
+        text: "Password",
+      },
+    ],
+    buttons: [
+      {
+        id: "login",
+        type: "submit",
+        className: "",
+        onClick: () => setSubmitLogIn(true),
+        text: "GO",
+      },
+      {
+        id: "singin",
+        type: "submit",
+        className: "button",
+        onClick: () => setSubmitLogIn(false),
+        text: "Sing Up",
+      },
+    ],
+  };
+
   return (
     <DefaultPage>
-      <section className={styles.formContainer}>
-        <form onSubmit={auth}>
-          <div className={styles.inputContainer}>
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              name="username"
-              id="username"
-              placeholder="jhon.rambo"
-            />
-          </div>
-
-          <div className={styles.inputContainer}>
-            <label htmlFor="password">Password:</label>
-            <input type="password" name="password" id="password" />
-          </div>
-
-          <div className={styles.buttonsContainer}>
-            <button onClick={() => setSubmitLogIn(true)} type="submit">
-              GO!
-            </button>
-            <button
-              onClick={() => setSubmitLogIn(false)}
-              type="submit"
-              className="button"
-            >
-              Sing Up
-            </button>
-          </div>
-        </form>
-      </section>
+      <Form handleRequestData={handleRequestData} components={components} />
     </DefaultPage>
   );
 };

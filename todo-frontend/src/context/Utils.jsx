@@ -107,14 +107,19 @@ const reducer = (state, action) => {
         ...state,
         toggle: {
           addTask: !state.toggle.addTask,
-          editTask: state.toggle.editTask,
+          editTask: false,
         },
       };
     }
 
     case "toggleEditTask": {
-      state.toggle.editTask = !state.toggle.editTask;
-      return state;
+      return {
+        ...state,
+        toggle: {
+          addTask: false,
+          editTask: !state.toggle.addTask,
+        },
+      };
     }
 
     default:

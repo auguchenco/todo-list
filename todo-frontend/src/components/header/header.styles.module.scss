@@ -30,6 +30,10 @@
       margin-top: 0.25rem;
     }
 
+    h1:hover {
+      cursor: pointer !important;
+    }
+
     nav {
       @include display-flex-center();
       gap: 1.5rem;

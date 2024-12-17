@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useUtils } from "../../context/Utils";
 import styles from "./header.styles.module.scss";
@@ -20,11 +21,15 @@ const Header = () => {
     }
   }, [location.pathname]);
 
+  const handleClickTitle = () => {
+    navigate(`/`);
+  };
+
   const handleClickLogInBttn = () => {
-    if (location.pathname === "/") {
-      navigate(`/log-in`);
-    } else {
+    if (location.pathname === "/log-in") {
       navigate(`/`);
+    } else {
+      navigate(`/log-in`);
     }
   };
 
@@ -35,12 +40,11 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.title}>
-        <h1>To-Do List</h1>
+        <h1 onClick={handleClickTitle}>To-Do List</h1>
         <nav>
-          {state.token && <a href="/">Home</a>}
-          {state.token && <a href={`/${state.user.username}`}>Profile</a>}
+          {state.token && <Link to={`/${state.user.username}`}>Profile</Link>}
           {state.token && (
-            <a href={`/${state.user.username}/todo-list`}>To Do List</a>
+            <Link to={`/${state.user.username}/todo-list`}>To Do List</Link>
           )}
         </nav>
       </div>

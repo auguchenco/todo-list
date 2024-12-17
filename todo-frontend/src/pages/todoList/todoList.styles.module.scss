@@ -1,7 +1,8 @@
-@import '../../assets/styles/_vars';
+@import "../../assets/styles/_vars";
 
 .taskListContainer {
-  background-color: transparent;;
+  @include display-flex-center();
+  background-color: transparent;
 }
 
 .taskList {

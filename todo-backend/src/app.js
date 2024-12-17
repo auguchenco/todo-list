@@ -8,6 +8,7 @@ import start from './config/app.start.js'
 import tokenAuth from './middlewares/auth.middleware.js';
 
 import authRoutes from './routes/auth.routes.js';
+import userRoutes from './routes/user.routes.js';
 import todoRoutes from './routes/todo.routes.js';
 
 // Set Databases & Enviroment
@@ -28,6 +29,7 @@ app.use('/auth', authRoutes);
 app.use(tokenAuth);
 
 // Private Routes
+app.use('/user', userRoutes);
 app.use('/todos', todoRoutes);
 
 app.listen(port, () => {

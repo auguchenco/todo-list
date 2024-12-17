@@ -314,7 +314,7 @@ const [c, setC] = useState(a + b);
 useEffect(() => {
   setC(a + b);
 }, [a, b]);
-
+ 
 Aca setC se ejecutara si o si cuando el estado de a o de b se actualiza, si utilizamos setA y/o setB y enseguida setC corresmos el riesgo de que no funcione (y no va a funcionar) ya que el set setteado en un useState funciona de manera similar a una funcion asyncronica, por lo que cuando ejecutemos setC no se habran  actualizado ni setA ni setB por mas que de hayan ejecutado.
 
 

@@ -36,6 +36,7 @@ This project is about a To-Do List on which you can:
  - Create tasks
  - Mark as checked a task previusously created
  - Delete tasks
+ - Find and see all or some tasks, depending of your choise
 
 Was developed using:
  - Node.js (as the default engine)
@@ -45,5 +46,5 @@ Was developed using:
  - React Router Dom (for manage the routing)
  - Axios (for api management)
  - Sass (for styles)
- - UUID (for create a unique identifier for every task)
  - Git & Git Hub (as a version management)
+ - dotenv

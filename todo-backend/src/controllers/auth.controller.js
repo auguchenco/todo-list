@@ -44,7 +44,7 @@ export const loginCtrl = async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await getUserByUsername(username);
-    
+
     if (!user?.id) {
       return errorResponseGenerator({
         status: 404,
@@ -65,7 +65,7 @@ export const loginCtrl = async (req, res) => {
     const token = tokenGenerator(user.id, user.username);
     successfulResponseGenerator({
       status: 201,
-      data: token,
+      data: { token, user: { id: user.id, username: user.username } },
       ...defaultResponse
     });
 

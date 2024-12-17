@@ -1,60 +1,86 @@
-import { useEffect, useState } from 'react';
-import styles from './task.styles.module.scss'
+import { useEffect, useState } from "react";
+import styles from "./task.styles.module.scss";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-const Task = ({task}) => {
+import { useUtils } from "../../context/Utils";
+
+const URL = "http://localhost:3000";
+
+const Task = ({ task }) => {
+  const navigate = useNavigate();
+
+  const { state, dispatch } = useUtils();
 
   const [className, setClassName] = useState(styles.task);
 
-  const navigate = useNavigate();
-
-  useEffect(()=>{
-    setClassName( task.isCompleted ? styles.taskCompleted : styles.task );
+  useEffect(() => {
+    setClassName(task.completed ? styles.taskCompleted : styles.task);
   }, []);
-  
+
   const handleToggle = async () => {
-    task.isCompleted = !task.isCompleted;
-    setClassName( task.isCompleted ? styles.taskCompleted : styles.task );
+    task.completed = !task.completed;
+    setClassName(task.completed ? styles.taskCompleted : styles.task);
     try {
-      const { res } = await axios.put(`http://localhost:3000/todos/${task.id}`, JSON.stringify(task));
-      console.log(res)
+      const { data } = await axios.put(
+        `${URL}/todos/${task.id}`,
+        JSON.stringify({
+          title: task.title,
+          description: task.description,
+          completed: !task.completed,
+        }),
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        }
+      );
+      dispatch({ type: "setTodoList" });
+      console.log(data);
     } catch (error) {
       console.error(error);
-    };
+    }
   };
 
   const deleteTask = async () => {
     try {
-      await axios.delete(`http://localhost:3000/todos/${task.id}`);
+      await axios.delete(`${URL}/todos/${task.id}`, {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      });
+      dispatch({ type: "setTodoList" });
       console.log("Task deleted");
     } catch (error) {
       console.error(error);
-    };
-    location.reload();
+    }
   };
 
-  const editTask = () => {
-    navigate(`edit-place/${task.id}`);
-  };
-  
+  const detailTask = () => navigate(`/${task.id}`);
+
   return (
-      <li className={className}>
+    <li className={className} onClick={detailTask}>
+      <div className={styles.taskHeader}>
+        <input
+          type="checkbox"
+          defaultChecked={task.completed}
+          onClick={handleToggle}
+        />
+        <h3>{task.title}</h3>
+        <button onClick={deleteTask}>Delete</button>
+      </div>
 
-        <div className={styles.taskHeader}>
-          <input type="checkbox" defaultChecked={task.isCompleted} onClick={handleToggle}/>
-          <h3>{task.name}</h3>
-          <button onClick={deleteTask}>Delete</button>
-        </div>
-        
-        <div className={styles.taskBody}>
-          <p>{task.description}</p>
-          <span>{task.creator}</span>
-          <button onClick={editTask}>Edit</button>
-        </div>
-      
-      </li>
-  )
-}
- 
-export default Task
+      <div className={styles.taskBody}>
+        <p>{task.description}</p>
+        <span>{task["updated_at"]}</span>
+        <button
+          onClick={dispatch({ type: "toggleEditTask", payload: task.id })}
+        >
+          Edit
+        </button>
+      </div>
+    </li>
+  );
+};
+
+export default Task;

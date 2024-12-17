@@ -1,14 +1,16 @@
-import styles from "./addTask.styles.module.scss";
+import styles from "./editTask.styles.module.scss";
 import { useUtils } from "../../context/Utils";
 
 import axios from "axios";
 
-const URL = "http://localhost:3000";
+import dotenv from "dotenv";
+dotenv.config();
+const URL = process.env.URL || "http://localhost:3000";
 
-const AddTask = () => {
+const EditTask = ({ id }) => {
   const { state, dispatch } = useUtils();
 
-  const addTask = async (event) => {
+  const editTask = async (event) => {
     event.preventDefault();
     const form = event.target;
     const formData = new FormData(form);
@@ -32,13 +34,13 @@ const AddTask = () => {
     } catch (error) {
       console.error(error);
     }
-    dispatch({ type: "toggleAddTask" });
+    dispatch({ type: "toggleAddTask", payload: undefined });
     form.reset();
   };
 
   return (
     <section className={styles.formContainer}>
-      <form onSubmit={addTask}>
+      <form onSubmit={editTask}>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Task:</label>
           <input
@@ -60,12 +62,16 @@ const AddTask = () => {
         </div>
 
         <div className={styles.buttonsContainer}>
-          <button type="submit">Add</button>
-          <button onClick={dispatch({ type: "toggleAddTask" })}>Cancel</button>
+          <button type="submit">Save</button>
+          <button
+            onClick={dispatch({ type: "toggleAddTask", payload: undefined })}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </section>
   );
 };
 
-export default AddTask;
+export default EditTask;

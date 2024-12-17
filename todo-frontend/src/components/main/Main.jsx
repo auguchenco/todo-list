@@ -1,9 +1,9 @@
 import styles from './main.styles.module.scss';
 
-const Main = (props) => {
+const Main = ({children}) => {
   return (
     <main className={styles.main}>
-      {props.children}
+      {children}
     </main>
   )
 }

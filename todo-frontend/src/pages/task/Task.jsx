@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import DefaultPage from "../../components/defaultPage/DefaultPage"
 import { useParams } from 'react-router-dom';
-import styles from './taskDetails.styles.module.scss';
+import styles from './task.styles.module.scss';
 import axios from "axios";
 
-const TaskDetails = () => {
+const Task = () => {
 
   const { taskId } = useParams();
 
@@ -48,4 +48,4 @@ const TaskDetails = () => {
   )
 }
 
-export default TaskDetails
+export default Task;

@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
 
-@import '../../assets/styles/_vars';
+@import "../../assets/styles/_vars";
 
 .header {
   background-color: #000;
@@ -9,17 +9,18 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   position: fixed;
   z-index: 1;
   box-shadow: 0 0 10px 5px #000;
+  padding: 0.5rem 0.5rem 0 0.5rem;
 
   .title {
     color: $primary-color;
     @include display-flex-center();
     flex-direction: column;
     gap: 0.5rem;
-    margin-left: 2rem;
+    padding: 0.5rem 2rem;
 
     h1 {
       font-size: 2rem;
@@ -27,30 +28,53 @@
       text-shadow: 0 0 5px $secondary-color;
       font-family: "Great Vibes", cursive;
       margin-top: 0.25rem;
-    };
+    }
 
-    .menu {
+    nav {
       @include display-flex-center();
       gap: 1.5rem;
-    };
+    }
   }
 
-  .searchBar {
+  .headerLeft {
     @include display-flex-center();
+    padding: 0.5rem 2rem;
 
-    input[type="text"] {
-      border-radius: 0.5rem 0 0 0.5rem;
-    };
+    .auth {
+      @include display-flex-center();
+      width: 65px;
+      .button {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+      }
+    }
+    .control {
+      @include display-flex-center();
+      gap: 5rem;
+      .session {
+        @include display-flex-center();
+        flex-direction: column;
+        gap: 0.75rem;
+        color: $primary-color !important;
+        .button {
+          width: 100%;
+        }
+      }
+    }
 
-    button {
-      border-radius: 0 0.5rem 0.5rem 0;
-    };
-       
-  };
+    .button {
+      border: 1px solid $secondary-color;
+      color: $secondary-color;
+    }
 
-  .actions {
-    @include display-flex-center();
-    gap: 2rem;
-  };
+    .button:hover {
+      box-shadow: 0 0 10px $primary-color;
+    }
 
-};
+    .button:active {
+      border: 1px solid $primary-color;
+      text-shadow: 0 0 5px $secondary-color;
+    }
+  }
+}

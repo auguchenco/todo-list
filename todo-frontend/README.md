@@ -47,3 +47,4 @@ Was developed using:
  - Axios (for api management)
  - Sass (for styles)
  - Git & Git Hub (as a version management)
+ - dotenv

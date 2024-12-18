@@ -1,5 +1,4 @@
 import styles from "./form.styles.module.scss";
-
 import axios from "axios";
 import { Button, Input } from "../formElements/FormElements";
 
@@ -19,7 +18,6 @@ const Form = ({ handleRequestData, components }) => {
     const { req, func } = handleRequestData(URL, result);
 
     try {
-      // res.data
       const { data } = await axios.post(req.url, req.data, req.config);
       func.tFunc(form, data.data);
     } catch (error) {

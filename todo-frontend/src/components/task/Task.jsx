@@ -24,11 +24,11 @@ const Task = ({ task }) => {
     try {
       const { data } = await axios.put(
         `${URL}/todos/${task.id}`,
-        JSON.stringify({
+        {
           title: task.title,
           description: task.description,
-          completed: !task.completed,
-        }),
+          isCompleted: task.completed,
+        },
         {
           headers: {
             Authorization: `Bearer ${state.token}`,
@@ -52,16 +52,20 @@ const Task = ({ task }) => {
     } catch (error) {
       console.error(error);
     }
+    dispatch({
+      type: "setTodoList",
+      payload: state.todoList.filter((t) => t.id !== task.id),
+    });
   };
 
   const editTask = () => {
-    dispatch({ type: "toggleEditTask", payload: task.id })
-  }
+    dispatch({ type: "toggleEditTask", payload: task.id });
+  };
 
   const detailTask = () => navigate(`/${task.id}`);
 
   return (
-    <li className={className} onClick={detailTask}>
+    <li className={className}>
       <div className={styles.taskHeader}>
         <input
           type="checkbox"
@@ -75,11 +79,7 @@ const Task = ({ task }) => {
       <div className={styles.taskBody}>
         <p>{task.description}</p>
         <span>{task["updated_at"]}</span>
-        <button
-          onClick={editTask}
-        >
-          Edit
-        </button>
+        <button onClick={editTask}>Edit</button>
       </div>
     </li>
   );

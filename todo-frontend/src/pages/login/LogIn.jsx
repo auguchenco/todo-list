@@ -24,23 +24,19 @@ const LogIn = () => {
               token: data.token,
             },
           });
-          form.reset();
           console.log(state);
           console.log(data);
           navigate(`/${data.user.username}`);
-          dispatch({ type: "setTodoList" });
         } else {
-          form.reset();
+          navigate(`/`);
         }
       },
       eFunc: (form) => {
         if (submitLogIn) {
           dispatch({ type: "deleteToken" });
-          form.reset();
         }
       },
       fFunc: () => {
-        navigate(`/`);
       },
     };
     return { req, func };

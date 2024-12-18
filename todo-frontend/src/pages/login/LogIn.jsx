@@ -28,7 +28,7 @@ const LogIn = () => {
           console.log(state);
           console.log(data);
           navigate(`/${data.user.username}`);
-          // dispatch({ type: "setTodoList" });
+          dispatch({ type: "setTodoList" });
         } else {
           form.reset();
         }

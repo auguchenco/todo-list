@@ -8,6 +8,7 @@ const UtilsContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
+    
     case "setToken": {
       const { user, token } = action.payload;
       sessionStorage.setItem(SESSION_STORAGE_KEY, `Bearer ${token}`);
@@ -47,54 +48,7 @@ const reducer = (state, action) => {
     }
 
     case "setTodoList": {
-      const getTodoList = async () => {
-        const completed = state.showConfig?.completed
-          ? state.showConfig.completed
-          : undefined;
-        const orderBy = state.showConfig?.orderBy
-          ? state.showConfig.orderBy
-          : undefined;
-        const order = state.showConfig?.order
-          ? state.showConfig.order
-          : undefined;
-        try {
-          let url = `${URL}/todos`;
-
-          if (completed || orderBy || order) {
-            url += "/?";
-            if (completed) {
-              if (url[-1] !== "?") {
-                url += "&";
-              }
-              url += `&completed=${completed}`;
-            }
-            if (orderBy) {
-              if (url[-1] !== "?") {
-                url += "&";
-              }
-              url += `orderBy=${orderBy}`;
-            }
-            if (order) {
-              if (url[-1] !== "?") {
-                url += "&";
-              }
-              url += `&order=${order}`;
-            }
-          }
-
-          const { data } = await axios.get(url, {
-            headers: {
-              Authorization: `Bearer ${state.token}`,
-            },
-          });
-          return data.data;
-        } catch (error) {
-          console.error("Error trying to get the todo list\n", error);
-          return undefined;
-        }
-      };
-      const todoList = getTodoList();
-      return { ...state, todoList };
+      return { ...state, todoList: action.payload };
     }
 
     case "setShowConfig": {

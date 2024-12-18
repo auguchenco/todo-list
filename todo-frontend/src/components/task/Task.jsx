@@ -35,7 +35,6 @@ const Task = ({ task }) => {
           },
         }
       );
-      dispatch({ type: "setTodoList" });
       console.log(data);
     } catch (error) {
       console.error(error);
@@ -49,12 +48,15 @@ const Task = ({ task }) => {
           Authorization: `Bearer ${state.token}`,
         },
       });
-      dispatch({ type: "setTodoList" });
       console.log("Task deleted");
     } catch (error) {
       console.error(error);
     }
   };
+
+  const editTask = () => {
+    dispatch({ type: "toggleEditTask", payload: task.id })
+  }
 
   const detailTask = () => navigate(`/${task.id}`);
 
@@ -74,7 +76,7 @@ const Task = ({ task }) => {
         <p>{task.description}</p>
         <span>{task["updated_at"]}</span>
         <button
-          onClick={dispatch({ type: "toggleEditTask", payload: task.id })}
+          onClick={editTask}
         >
           Edit
         </button>

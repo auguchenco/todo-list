@@ -1,14 +1,10 @@
 import styles from "./form.styles.module.scss";
-import { useUtils } from "../../context/Utils";
-
 import axios from "axios";
+import { Button, Input } from "../formElements/FormElements";
 
-import dotenv from "dotenv";
-dotenv.config();
-const URL = process.env.URL || "http://localhost:3000";
+const URL = "http://localhost:3000";
 
-const Form = (props) => {
-  const { state, dispatch } = useUtils();
+const Form = ({ handleRequestData, components }) => {
 
   const submitResult = async (event) => {
     event.preventDefault();
@@ -19,56 +15,34 @@ const Form = (props) => {
       result[key] = value;
     });
 
+    const { req, func } = handleRequestData(URL, result);
+
     try {
-      const { data } = await axios.post(
-        `${URL}/todos`,
-        JSON.stringify(result),
-        {
-          headers: {
-            Authorization: `Bearer ${state.token}`,
-          },
-        }
-      );
-      dispatch({ type: "setTodoList" });
-      console.log(data);
+      const { data } = await axios.post(req.url, req.data, req.config);
+      func.tFunc(form, data.data);
     } catch (error) {
       console.error(error);
+      func.eFunc(form);
+    } finally {
+      func.fFunc();
+      form.reset();
     }
-    dispatch({ type: "toggleAddTask", payload: undefined });
-    form.reset();
   };
 
   return (
     <section className={styles.formContainer}>
       <form onSubmit={submitResult}>
-        <div className={styles.inputContainer}>
-          <label htmlFor="title">Task:</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="Do something..."
-          />
-        </div>
 
-        <div className={styles.inputContainer}>
-          <label htmlFor="description">Description:</label>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            placeholder="Start doing ... and continue with ..."
-          />
-        </div>
+        {components.inputs.map((input) => (
+          <Input key={input.id} input={input} />
+        ))}
 
         <div className={styles.buttonsContainer}>
-          <button type="submit">Save</button>
-          <button
-            onClick={dispatch({ type: "toggleAddTask", payload: undefined })}
-          >
-            Cancel
-          </button>
+          {components.buttons.map((button) => (
+            <Button key={button.id} button={button} />
+          ))}
         </div>
+
       </form>
     </section>
   );

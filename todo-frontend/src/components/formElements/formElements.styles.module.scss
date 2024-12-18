@@ -1,0 +1,18 @@
+@import "../../assets/styles/_vars";
+
+.inputContainer {
+  @include display-flex-center();
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 5rem;
+
+  label {
+    color: $primary-color;
+    font-weight: bold;
+    width: 6rem;
+  }
+
+  input {
+    flex-grow: 1;
+  }
+};

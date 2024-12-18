@@ -69,7 +69,10 @@ const Header = () => {
             )}
             <div className={styles.session}>
               <span>Welcome, {`${state.user.username}`}!</span>
-              <button className={styles.button} onClick={handleLogOutBtn}>
+              <button
+                className={`${styles.button} button`}
+                onClick={handleLogOutBtn}
+              >
                 Logout
               </button>
             </div>

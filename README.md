@@ -41,3 +41,7 @@ npm run app
 Finally, with this command we can run the application and start using that on our browser with the next URL:
 
 > <http://127.0.0.1:5173/>
+
+## START USING
+
+To initialize session you need to creat a new user and then login session. Register do not login session.

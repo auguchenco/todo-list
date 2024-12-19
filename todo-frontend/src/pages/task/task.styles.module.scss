@@ -1,5 +1,4 @@
-@import '../../assets/styles/_vars';
-
+@import "../../assets/styles/_vars";
 
 @mixin taskDefault($fd, $c, $bgc, $bsc) {
   @include display-flex-center();
@@ -21,11 +20,11 @@
 
 .task {
   @include taskDefault(column, $primary-color, #000000cc, $primary-color);
-};
+}
 
 .taskCompleted {
-  @include taskDefault(column, #000, #ffffff66, $secondary-color);
-};
+  @include taskDefault(column, $secondary-color, #ffffff66, $secondary-color);
+}
 
 .taskHeader {
   @include display-flex-center();
@@ -36,11 +35,8 @@
   h3 {
     font-size: 3rem;
     font-weight: bold;
-  };
-
-  
-  
-};
+  }
+}
 
 .taskBody {
   @include display-flex-center();
@@ -49,8 +45,8 @@
   span {
     font-weight: bold;
     font-size: 2rem;
-  };
+  }
   p {
     font-size: 2rem;
   }
-};
+}

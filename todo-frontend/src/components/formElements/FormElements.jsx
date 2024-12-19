@@ -9,6 +9,7 @@ export const Input = ({ input }) => {
         id={input.id}
         name={input.id}
         placeholder={input.placeholder}
+        defaultValue={input.defaultValue}
       />
     </div>
   );

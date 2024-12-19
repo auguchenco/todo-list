@@ -9,8 +9,14 @@ const LogIn = () => {
   const navigate = useNavigate();
   const [submitLogIn, setSubmitLogIn] = useState(true);
 
+  const handleCancel = () => {
+    setSubmitLogIn(false);
+    navigate("/");
+  };
+
   const handleRequestData = (URL, result) => {
     const req = {
+      type: "POST",
       url: submitLogIn ? URL + "/auth/login" : URL + "/auth/register",
       data: result,
     };
@@ -36,8 +42,7 @@ const LogIn = () => {
           dispatch({ type: "deleteToken" });
         }
       },
-      fFunc: () => {
-      },
+      fFunc: () => {},
     };
     return { req, func };
   };
@@ -68,9 +73,16 @@ const LogIn = () => {
       {
         id: "singin",
         type: "submit",
-        className: "button",
+        className: "secondaryButton",
         onClick: () => setSubmitLogIn(false),
         text: "Sing Up",
+      },
+      {
+        id: "cancel",
+        type: "reset",
+        className: "button",
+        onClick: () => handleCancel(),
+        text: "Cancel",
       },
     ],
   };

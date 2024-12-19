@@ -5,11 +5,11 @@ import AddTask from "../../components/addTask/AddTask";
 import { useUtils } from "../../context/Utils";
 import { useEffect } from "react";
 import axios from "axios";
-
-const URL = "http://localhost:3000";
+import EditTask from "../../components/editTask/EditTask";
 
 const TodoList = () => {
   const { state, dispatch } = useUtils();
+  const URL = state.serverUrl;
 
   useEffect(() => {
     const getTodoList = async () => {
@@ -35,15 +35,14 @@ const TodoList = () => {
           },
         });
 
-        console.log(data.data);
-        dispatch({ type: "setTodoList", payload: data.data || [] });
+        dispatch({ type: "setTodoList", payload: data.data.reverse() || [] });
       } catch (error) {
         console.error("Error trying to get the todo list\n", error);
         dispatch({ type: "setTodoList", payload: [] });
       }
     };
     getTodoList();
-  }, []);
+  }, [state.toggle]);
 
   return (
     <DefaultPage>
@@ -54,6 +53,7 @@ const TodoList = () => {
           ))}
         </ul>
         {state.toggle.addTask && <AddTask />}
+        {state.toggle.editTask.value && <EditTask />}
       </section>
     </DefaultPage>
   );

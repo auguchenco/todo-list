@@ -28,13 +28,16 @@ main {
 a {
   color: $primary-color;
   text-decoration: none;
+  transition: 1s;
 }
 
 a:hover {
   color: $secondary-color;
+  transition: 0.5s;
 }
 
 button {
+  box-sizing: border-box;
   font-size: 1rem;
   height: 2rem;
   padding: 0.5rem;
@@ -43,31 +46,30 @@ button {
   border: 1px solid $primary-color;
   color: $primary-color;
   @include display-flex-center();
-}
-
-button:hover {
-  cursor: pointer;
-  box-shadow: 0 0 10px $secondary-color;
-}
-
-button:active {
-  background-color: #666;
-  border: 1px solid $secondary-color;
-  text-shadow: 0 0 5px $primary-color;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 10px $primary-color;
+  }
+  &:active,
+  &:focus-visible {
+    background-color: #666;
+  }
 }
 
 .button {
   border: 1px solid $secondary-color;
   color: $secondary-color;
+  &:hover {
+    box-shadow: 0 0 10px $secondary-color;
+  }
 }
 
-.button:hover {
-  box-shadow: 0 0 10px $primary-color;
-}
-
-.button:active {
-  border: 1px solid $primary-color;
-  text-shadow: 0 0 5px $secondary-color;
+.secondaryButton {
+  color: $tertiary-color;
+  border-color: $tertiary-color;
+  &:hover {
+    box-shadow: 0 0 10px $tertiary-color;
+  }
 }
 
 input[type="text"],
@@ -78,6 +80,15 @@ input[type="password"] {
   padding: 0 0.5rem;
   width: 25vw;
   transition: 1000ms;
+  text-align: center !important;
+  &::placeholder {
+    text-align: center !important;
+    transition: opacity 1s ease;
+  }
+
+  &:focus::placeholder {
+    opacity: 0;
+  }
 }
 
 input[type="text"]:hover,

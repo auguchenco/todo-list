@@ -1,1 +1,78 @@
-@import '../../assets/styles/_vars';
+@import "../../assets/styles/_vars";
+
+.profileContainer {
+  background-color: #1c1c1c;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  width: 300px;
+  margin: 20px auto;
+}
+
+.profileTitle {
+  font-size: 32px;
+  font-weight: bold;
+  color: $neon-blue;
+  text-shadow: 0 0 5px $neon-blue, 0 0 10px $neon-blue, 0 0 15px $neon-purple;
+}
+
+.profileDetails {
+  margin-top: 20px;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.username {
+  margin: 10px 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.highlight {
+  color: $neon-pink;
+  text-shadow: 0 0 5px $neon-pink, 0 0 10px $neon-pink;
+}
+
+.taskProgress {
+  margin: 20px 0;
+  font-size: 16px;
+  color: $secondary-color;
+  text-shadow: 0 0 5px $secondary-color, 0 0 10px $secondary-color;
+}
+
+.progressBarContainer {
+  width: 100%;
+  background-color: $primary-color;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.progressBar {
+  height: 10px;
+  background-color: $tertiary-color;
+  transition: width 0.5s ease-in-out;
+}
+
+@keyframes neon {
+  0% {
+    text-shadow: 0 0 5px $neon-blue, 0 0 10px $neon-blue, 0 0 15px $neon-purple;
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 0 0 3px $neon-blue, 0 0 6px $neon-purple, 0 0 9px $neon-pink;
+    opacity: 0.7;
+  }
+  100% {
+    text-shadow: 0 0 5px $neon-blue, 0 0 10px $neon-blue, 0 0 15px $neon-purple;
+    opacity: 1;
+  }
+}
+
+.profileTitle,
+.highlight,
+.taskProgress {
+  animation: neon 1.5s infinite alternate;
+}

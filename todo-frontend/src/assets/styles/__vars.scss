@@ -2,11 +2,21 @@ $primary-color: #0fd;
 $secondary-color: #f0d;
 $tertiary-color: #fd0;
 
+$neon-white: #fff;
+$neon-blue: #00d9ff;
+$neon-pink: #ff00cc;
+$neon-purple: #ff00ff;
+
 $transparent-background-color: #000000dd;
 
-
-@mixin display-flex-center(){
+@mixin display-flex-center() {
   display: flex;
   justify-content: center;
   align-items: center;
-};
+}
+
+@mixin display-forms($ss) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

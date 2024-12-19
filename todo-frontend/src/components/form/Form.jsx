@@ -1,11 +1,11 @@
 import styles from "./form.styles.module.scss";
 import axios from "axios";
 import { Button, Input } from "../formElements/FormElements";
+import { useUtils } from "../../context/Utils";
 
-const URL = "http://localhost:3000";
-
-const Form = ({ handleRequestData, components }) => {
-
+const Form = ({ handleRequestData, components, formType }) => {
+  const { state } = useUtils();
+  const URL = state.serverUrl;
   const submitResult = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -16,9 +16,28 @@ const Form = ({ handleRequestData, components }) => {
     });
 
     const { req, func } = handleRequestData(URL, result);
+    
+    let request;
+    switch (req.type) {
+      case "GET":
+        request = axios.get;
+        break;
+      case "POST":
+        request = axios.post;
+        break;
+      case "PUT":
+        request = axios.put;
+        break;
+      case "DELETE":
+        request = axios.delete;
+        break;
+    
+      default:
+        break;
+    }
 
     try {
-      const { data } = await axios.post(req.url, req.data, req.config);
+      const { data } = await request(req.url, req.data, req.config);
       func.tFunc(form, data.data);
     } catch (error) {
       console.error(error);
@@ -30,11 +49,18 @@ const Form = ({ handleRequestData, components }) => {
   };
 
   return (
-    <section className={styles.formContainer}>
+    <section
+      className={
+        formType === undefined ? styles.formContainer : styles.formContainerTask
+      }
+    >
       <form onSubmit={submitResult}>
-
         {components.inputs.map((input) => (
-          <Input key={input.id} input={input} />
+          <Input
+            key={input.id}
+            input={input}
+            defaultValue={input.defaultValue}
+          />
         ))}
 
         <div className={styles.buttonsContainer}>
@@ -42,7 +68,6 @@ const Form = ({ handleRequestData, components }) => {
             <Button key={button.id} button={button} />
           ))}
         </div>
-
       </form>
     </section>
   );

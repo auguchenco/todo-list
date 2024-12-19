@@ -15,7 +15,7 @@ const Header = () => {
 
   useEffect(() => {
     if (location.pathname === "/log-in") {
-      setLogInBttn({ text: "X", style: styles.button });
+      setLogInBttn({ text: "X", style: styles.hidden });
     } else {
       setLogInBttn({ text: "Log In", style: undefined });
     }
@@ -33,7 +33,7 @@ const Header = () => {
     }
   };
 
-  const handleLogOutBtn = () => {
+  const handleClickLogOutBtn = () => {
     dispatch({ type: "deleteToken" });
     navigate(`/`);
   };
@@ -68,12 +68,19 @@ const Header = () => {
               </div>
             )}
             <div className={styles.session}>
-              <span>Welcome, {`${state.user.username}`}!</span>
+              <span>
+                Welcome,{" "}
+                <Link
+                  to={`/${state.user.username}`}
+                  className={styles.userName}
+                >{`${state.user.username}`}</Link>
+                !
+              </span>
               <button
                 className={`${styles.button} button`}
-                onClick={handleLogOutBtn}
+                onClick={handleClickLogOutBtn}
               >
-                Logout
+                Log Out
               </button>
             </div>
           </div>

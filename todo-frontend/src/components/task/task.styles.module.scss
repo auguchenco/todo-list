@@ -1,4 +1,4 @@
-@import '../../assets/styles/_vars';
+@import "../../assets/styles/_vars";
 
 @mixin taskDefault($fd, $c, $bgc, $bsc) {
   @include display-flex-center();
@@ -14,26 +14,43 @@
   width: 100%;
   min-width: 50vw;
   max-width: 1000px;
+  &:hover {
+    transition: 1000ms;
+    box-shadow: 0 0 30px 20px $bsc;
+    background-color: #000000df;
+    color: $primary-color;
+  }
+  button {
+    width: 64px;
+  }
 }
 
 .task {
-  @include taskDefault(column, $primary-color, #000000cc, $primary-color);
+  @include taskDefault(column, $primary-color, #000000df, $primary-color);
   transition: 1000ms;
-};
+}
 
 .taskCompleted {
-  @include taskDefault(column, #00000088, #00000044, $secondary-color);
+  @include taskDefault(column, $secondary-color, #00000044, $secondary-color);
   transition: 1000ms;
 
-  
-  h3, p, span {
-    text-decoration: line-through;
-  };
+  button,
+  h3 {
+    color: $secondary-color;
+    border-color: $secondary-color;
+    transition: 1000ms;
+  }
 
-  button {
-    filter: opacity(0.5)
-  };
-};
+  .taskBody {
+    display: none;
+  }
+
+  &:hover {
+    .taskBody {
+      display: flex;
+    }
+  }
+}
 
 .taskHeader {
   @include display-flex-center();
@@ -42,20 +59,24 @@
 
   h3 {
     font-size: 1.5rem;
+    align-self: center;
+    &:hover {
+      cursor: pointer;
+    }
   }
-
-};
+}
 
 .taskBody {
   @include display-flex-center();
   flex-direction: column;
   gap: 1.5rem;
-};
+}
 
 input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
   background-color: #ffffff33;
+  margin-right: 48px;
 
   font: inherit;
   color: $primary-color;
@@ -63,6 +84,7 @@ input[type="checkbox"] {
   height: 1rem;
   border: 2px solid currentColor;
   border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 input[type="checkbox"]:checked {

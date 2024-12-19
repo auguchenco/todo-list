@@ -6,6 +6,7 @@ const AddTask = () => {
 
   const handleRequestData = (URL, result) => {
     const req = {
+      type: "POST",
       url: URL + "/todos",
       data: result,
       config: {
@@ -29,13 +30,13 @@ const AddTask = () => {
       {
         type: "text",
         id: "title",
-        placeholder: "Something you must to do",
-        text: "Task",
+        placeholder: "To do... ✍🏽",
+        text: "📜 Task",
       },
       {
         type: "text",
         id: "description",
-        placeholder: "Step 1...",
+        placeholder: "Start doing... 🦶🏽",
         text: "Description",
       },
     ],
@@ -49,7 +50,7 @@ const AddTask = () => {
       },
       {
         id: "cancelAddTask",
-        type: "",
+        type: "reset",
         className: "button",
         onClick: () => dispatch({ type: "toggleAddTask" }),
         text: "Cancel",
@@ -57,7 +58,13 @@ const AddTask = () => {
     ],
   };
 
-  return <Form handleRequestData={handleRequestData} components={components} />;
+  return (
+    <Form
+      handleRequestData={handleRequestData}
+      components={components}
+      formType="addTask"
+    />
+  );
 };
 
 export default AddTask;

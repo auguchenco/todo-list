@@ -2,19 +2,18 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useReducer } from "react";
 
 const SESSION_STORAGE_KEY = "todo_list_storage";
-const URL = "http://localhost:3000";
 
 const UtilsContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
-    
     case "setToken": {
       const { user, token } = action.payload;
       sessionStorage.setItem(SESSION_STORAGE_KEY, `Bearer ${token}`);
       return {
         user: user,
         token: token,
+        serverUrl: "http://localhost:3000",
         todoList: [],
         showConfig: {
           completed: undefined,
@@ -23,7 +22,7 @@ const reducer = (state, action) => {
         },
         toggle: {
           addTask: false,
-          editTask: false,
+          editTask: { value: false, taskId: undefined },
         },
       };
     }
@@ -33,6 +32,7 @@ const reducer = (state, action) => {
       state = {
         user: { id: undefined, username: undefined },
         token: undefined,
+        serverUrl: "http://localhost:3000",
         todoList: undefined,
         showConfig: {
           completed: undefined,
@@ -41,7 +41,7 @@ const reducer = (state, action) => {
         },
         toggle: {
           addTask: false,
-          editTask: false,
+          editTask: { value: false, taskId: undefined },
         },
       };
       return state;
@@ -61,7 +61,7 @@ const reducer = (state, action) => {
         ...state,
         toggle: {
           addTask: !state.toggle.addTask,
-          editTask: false,
+          editTask: { value: false, taskId: undefined },
         },
       };
     }
@@ -71,7 +71,9 @@ const reducer = (state, action) => {
         ...state,
         toggle: {
           addTask: false,
-          editTask: !state.toggle.addTask,
+          editTask: !state.toggle.editTask.value
+            ? { value: true, taskId: action.payload }
+            : { value: false, taskId: undefined },
         },
       };
     }
@@ -87,7 +89,7 @@ export const UtilsProvider = ({ children }) => {
       const token = sessionStorage.getItem(SESSION_STORAGE_KEY)?.split(" ")[1];
       if (token) {
         try {
-          const { data } = await axios.get(`${URL}/user/me`, {
+          const { data } = await axios.get(`${state.serverUrl}/user/me`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -111,6 +113,7 @@ export const UtilsProvider = ({ children }) => {
       username: undefined,
     },
     token: undefined,
+    serverUrl: "http://localhost:3000",
     todoList: undefined,
     showConfig: {
       completed: undefined,
@@ -119,7 +122,7 @@ export const UtilsProvider = ({ children }) => {
     },
     toggle: {
       addTask: false,
-      editTask: false,
+      editTask: { value: false, taskId: undefined },
     },
   });
 

@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 import { useUtils } from "../../context/Utils";
 
-const URL = "http://localhost:3000";
 
 const Task = ({ task }) => {
+  const { state, dispatch } = useUtils();
+  const URL = state.serverUrl;
   const navigate = useNavigate();
 
-  const { state, dispatch } = useUtils();
 
   const [className, setClassName] = useState(styles.task);
 
@@ -59,10 +59,14 @@ const Task = ({ task }) => {
   };
 
   const editTask = () => {
-    dispatch({ type: "toggleEditTask", payload: task.id });
+    dispatch({
+      type: "toggleEditTask",
+      payload: task.id,
+    });
   };
 
-  const detailTask = () => navigate(`/${task.id}`);
+  const detailTask = () =>
+    navigate(`/${state.user.username}/todo-list/${task.id}`);
 
   return (
     <li className={className}>
@@ -72,7 +76,7 @@ const Task = ({ task }) => {
           defaultChecked={task.completed}
           onClick={handleToggle}
         />
-        <h3>{task.title}</h3>
+        <h3 onClick={detailTask}>{task.title}</h3>
         <button onClick={deleteTask}>Delete</button>
       </div>
 

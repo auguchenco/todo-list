@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useUtils } from "../../context/Utils";
 import styles from "./header.styles.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
+import SearchBar from "../searchBar/SearchBar";
 
 const Header = () => {
   const { state, dispatch } = useUtils();
@@ -48,6 +49,11 @@ const Header = () => {
           )}
         </nav>
       </div>
+
+      {state.token &&
+        location.pathname === `/${state.user.username}/todo-list` && (
+          <SearchBar />
+        )}
 
       <div className={styles.headerLeft}>
         {!state.token && (

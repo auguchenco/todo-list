@@ -31,7 +31,7 @@ const AddTask = () => {
         type: "text",
         id: "title",
         placeholder: "To do... ✍🏽",
-        text: "📜 Task",
+        text: "Task",
       },
       {
         type: "text",

@@ -56,7 +56,7 @@ const TodoList = () => {
         </ul>
         {state.toggle.addTask && <AddTask />}
         {state.toggle.editTask.value && <EditTask />}
-        {!state.toggle.addTask && !state.toggle.editTask.value && <UserCard />}
+        {!state.toggle.addTask && !state.toggle.editTask.value && !state.toggle.sortList && <UserCard />}
       </section>
     </DefaultPage>
   );

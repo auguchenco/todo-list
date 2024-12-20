@@ -3,7 +3,7 @@ import styles from "./formElements.styles.module.scss";
 export const Input = ({ input }) => {
   return (
     <div className={styles.inputContainer}>
-      <label htmlFor={input.id}>{input.text}</label>
+      {!input.noLabel && <label htmlFor={input.id}>{input.text}</label>}
       <input
         type={input.type}
         id={input.id}

@@ -1,1 +1,43 @@
-@import '../../assets/styles/_vars';
+@import "../../assets/styles/_vars";
+
+.searchBar {
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  button {
+    width: 3.5rem;
+    padding: 0;
+    font-size: 2rem;
+  }
+  .searchBtn {
+    padding-left: 0.3rem;
+    padding-bottom: 0.2rem;
+    border-radius: 50px 0 0 50px;
+    background-color: #00ffff66;
+    text-shadow: 0 0 5px $primary-color;
+  }
+  .sortBtn {
+    padding-right: 0.3rem;
+    color: $secondary-color;
+    background-color: #ff00ff66;
+    border-color: $secondary-color;
+    border-radius: 0 50px 50px 0;
+    text-shadow: 0 0 5px $secondary-color;
+    &:hover {
+      box-shadow: 0 0 10px $secondary-color;
+    }
+  }
+  input {
+    border-radius: 0;
+    border-color: $secondary-color;
+    border-top: 1px solid $secondary-color;
+    &:focus-visible {
+      border-color: $primary-color !important;
+    }
+    &::placeholder {
+      color: $secondary-color;
+    filter: opacity(0.75);
+      transition: opacity 1s ease;
+    }
+  }
+}

@@ -39,7 +39,9 @@ a:hover {
 button {
   box-sizing: border-box;
   font-size: 1rem;
-  height: 2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  height: 2.1rem;
   width: 75px;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -75,34 +77,40 @@ button {
 
 input[type="text"],
 input[type="password"] {
-  background-color: $primary-color;
+  font-weight: bold;
+
+  background-color: transparent;
+  color: $tertiary-color;
   height: 2.1rem;
-  border-radius: 0.5rem;
+  border: none;
+  border-bottom: 1px solid $primary-color;
+  transition: border-color 0.3s ease;
   padding: 0 0.5rem;
-  // width: 25vw;
   transition: 1000ms;
-  text-align: center !important;
+  // text-align: center !important;
+
   &::placeholder {
-    text-align: center !important;
+    // text-align: center !important;
+    color: $primary-color;
+    filter: opacity(0.5);
     transition: opacity 1s ease;
+    font-weight: bold;
+
   }
 
   &:focus::placeholder {
+
     opacity: 0;
   }
-}
-
-input[type="text"]:hover,
-input[type="password"]:hover {
-  background-color: $tertiary-color;
-  transition: 1000ms;
+  caret-color: $primary-color;
 }
 
 input[type="text"]:focus-visible,
 input[type="password"]:focus-visible {
+  color: $secondary-color;
+  transition: 1000ms;
   outline-offset: 0px;
   outline: none;
-  background-color: $secondary-color;
-  box-shadow: 0 0 10px $secondary-color;
-  transition: 1000ms;
+  background-color: transparent;
+  border-color: $secondary-color;
 }

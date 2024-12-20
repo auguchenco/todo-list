@@ -1,6 +1,6 @@
+import styles from "./userCard.styles.module.scss";
 import { useEffect, useState } from "react";
 import { useUtils } from "../../context/Utils";
-import styles from "./userCard.styles.module.scss";
 import axios from "axios";
 
 const UserCard = () => {
@@ -45,7 +45,7 @@ const UserCard = () => {
   return (
     <div className={styles.userCardContainer}>
       <div className={styles.userCard}>
-        <h3>User</h3>
+        <h3>Progress</h3>
         <div className={styles.infoContainer}>
           <p>Username: </p>
           <span>{user.username}</span>

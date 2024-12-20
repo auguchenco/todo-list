@@ -1,5 +1,5 @@
 import { defaultResponseGenerator, successfulResponseGenerator, errorResponseGenerator } from "../config/generators/response.generator.js";
-import { createTask, getTodoList, getTaskById, setTask, deletTask } from "../models/todo.model.js";
+import { createTask, getTodoList, getTaskById, setTask, deletTask } from "../models/todo.model copy.js";
 
 export const createTaskCtrl = async (req, res) => {
   const defaultResponse = defaultResponseGenerator(res, 'task', 'create', 'created');
@@ -29,7 +29,8 @@ export const getTodoListCtrl = async (req, res) => {
 
   try {
     const userId = req.user?.id;
-    const todoList = await getTodoList(userId);
+    const queryParams = req.query;
+    const todoList = await getTodoList(userId, queryParams);
 
     successfulResponseGenerator({
       status: 201,

@@ -1,1 +1,102 @@
 @import "../../assets/styles/_vars";
+
+@keyframes diplayUserCard {
+  0% {
+    top: -265px;
+    opacity: 0;
+  }
+  50% {
+    top: 25vh;
+    opacity: 1;
+  }
+  100% {
+    top: 25vh;
+    opacity: 1;
+  }
+}
+@keyframes neon {
+  0% {
+    text-shadow: 0 0 3px $neon-white, 0 0 6px $neon-white,
+      0 0 10px $secondary-color, 0 0 15px $secondary-color,
+      0 0 20px $primary-color, 0 0 25px $primary-color, 0 0 30px $tertiary-color;
+    opacity: 1;
+  }
+
+  50% {
+    text-shadow: 0 0 2px $neon-purple, 0 0 4px $neon-purple,
+      0 0 8px $secondary-color, 0 0 12px $secondary-color;
+    opacity: 0.5;
+  }
+
+  100% {
+    text-shadow: 0 0 3px $neon-white, 0 0 6px $neon-white,
+      0 0 10px $secondary-color, 0 0 15px $secondary-color,
+      0 0 20px $primary-color, 0 0 25px $primary-color, 0 0 30px $tertiary-color;
+    opacity: 1;
+  }
+}
+
+.userCardContainer {
+  animation: diplayUserCard 2s ease-out forwards;
+  position: fixed;
+  top: -265px;
+  z-index: 1;
+  opacity: 0;
+  font-size: 2rem;
+  gap: 3rem;
+
+  transform: translateX(-50%);
+  left: 50% !important;
+  .userCard {
+    @include display-flex-center();
+    flex-direction: column;
+    gap: 3rem;
+    z-index: 1;
+    padding: 3rem;
+    background-color: #000;
+    box-shadow: 0 0 10px 5px $primary-color;
+    border: 2px solid $primary-color;
+    border-radius: 1rem;
+    color: $primary-color;
+
+    h3 {
+      color: $primary-color;
+      font-size: 3rem;
+      letter-spacing: 0.15rem;
+      font-weight: bold;
+      font-family: "Great Vibes", cursive;
+      margin-top: 0.25rem;
+      animation: neon 1.5s infinite alternate;
+      &:hover {
+        cursor: pointer !important;
+      }
+    }
+    .infoContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 5rem;
+      p {
+        font-weight: bold;
+      }
+      span {
+        color: $secondary-color;
+      }
+    }
+    .progressBarContainer {
+      background-color: #ff00ff90;
+      display: flex;
+      width: 100%;
+      border-radius: 50px;
+      .progressBarCompleted {
+        height: 10px;
+        background-color: $primary-color;
+        border-radius: 50px;
+        transition: width 0.5s ease-in-out;
+        box-shadow: 0 0 10px $primary-color;
+        overflow: hidden;
+      }
+    }
+  }
+}

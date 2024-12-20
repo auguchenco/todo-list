@@ -23,6 +23,7 @@ const reducer = (state, action) => {
         toggle: {
           addTask: false,
           editTask: { value: false, taskId: undefined },
+          sortList: false,
         },
       };
     }
@@ -42,6 +43,7 @@ const reducer = (state, action) => {
         toggle: {
           addTask: false,
           editTask: { value: false, taskId: undefined },
+          sortList: false,
         },
       };
       return state;
@@ -62,6 +64,7 @@ const reducer = (state, action) => {
         toggle: {
           addTask: !state.toggle.addTask,
           editTask: { value: false, taskId: undefined },
+          sortList: false,
         },
       };
     }
@@ -71,7 +74,22 @@ const reducer = (state, action) => {
         ...state,
         toggle: {
           addTask: false,
-          editTask: { value: action.payload.value, taskId: action.payload.taskId }
+          editTask: {
+            value: action.payload.value,
+            taskId: action.payload.taskId,
+          },
+        },
+        sortList: false,
+      };
+    }
+
+    case "toggleSortList": {
+      return {
+        ...state,
+        toggle: {
+          addTask: false,
+          editTask: { value: false, taskId: undefined },
+          sortList: !state.toggle.sortList,
         },
       };
     }

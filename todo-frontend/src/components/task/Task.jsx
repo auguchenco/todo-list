@@ -10,6 +10,8 @@ const Task = ({ task }) => {
   const URL = state.serverUrl;
   const navigate = useNavigate();
 
+  const createdAt = new Date(task["updated_at"]);
+
   const [className, setClassName] = useState(styles.task);
   const [toggled, setToggled] = useState(false);
 
@@ -94,13 +96,32 @@ const Task = ({ task }) => {
           onClick={handleToggle}
         />
         <h3 onClick={detailTask}>{task.title}</h3>
-        <button onClick={deleteTask}>Delete</button>
+        <button onClick={deleteTask} className="button">
+          Delete
+        </button>
       </div>
 
       <div className={styles.taskBody}>
-        <p>{task.description}</p>
-        <span>{task["updated_at"]}</span>
-        <button onClick={editTask}>Edit</button>
+        <div className={styles.left}>
+          <h4>CREATED</h4>
+          <div>
+            <p>Date:</p>
+            <span>{createdAt.toLocaleDateString()}</span>
+          </div>
+          <div>
+            <p>Time:</p>
+            <span>{createdAt.toLocaleTimeString().slice(0, 5)}</span>
+          </div>
+        </div>
+
+        <p className={styles.center}>{task.description}</p>
+
+        <div className={styles.right}>
+          <button onClick={editTask} className="secondaryButton">
+            Edit
+          </button>
+          <button onClick={detailTask}>Details</button>
+        </div>
       </div>
     </li>
   );

@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: 0.5rem;
   // justify-content: space-between;
   // width: 100%;
   // padding: 0 5rem;
@@ -17,6 +18,4 @@
   input {
     // flex-grow: 1;
   }
-
-  
-};
+}

@@ -39,10 +39,36 @@ export const createTask = async (userId, title, description) => {
 };
 
 export const getTodoList = async (userId, queryParams) => {
-  let todoListMoDb = await Task.find({ 'user_id': userId });
+
+  console.log("queryParams");
+  console.log(queryParams);
+  const { completed, orderBy, order } = queryParams;
+  console.log(typeof completed);
+  console.log(typeof orderBy);
+  console.log(typeof order);
+  let queryMo = {
+    "user_id": userId
+  }
+  if (completed) {
+    queryMo = (completed === "true") ? { ...queryMo, "completed": true } : { ...queryMo, "completed": false };
+  };
+
+
+  let todoListMoDb = await Task.find(queryMo);
+
+
 
   if (JSON.stringify(todoListMoDb) == '[]') {
-    const resultPgDb = await pgDb.query(`SELECT * FROM todo_list WHERE user_id = $1;`, [userId]);
+    const queryPg = completed ?
+      {
+        query: `SELECT * FROM todo_list WHERE user_id = $1 AND completed = $2;`,
+        arr: [userId, completed]
+      }
+      : {
+        query: `SELECT * FROM todo_list WHERE user_id = $1 AND completed = $2;`,
+        arr: [userId, completed]
+      };
+    const resultPgDb = await pgDb.query(queryMo.query, queryPg.arr);
     const todoListPgDb = resultPgDb?.rows;
     console.log('TODO LIST PG:\n', todoListPgDb);
 

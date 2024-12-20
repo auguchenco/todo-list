@@ -46,7 +46,7 @@ const EditTask = () => {
         type: "text",
         id: "title",
         placeholder: "To do... ✍🏽",
-        text: "📜 Task",
+        text: "Task",
         defaultValue: task.title,
       },
       {

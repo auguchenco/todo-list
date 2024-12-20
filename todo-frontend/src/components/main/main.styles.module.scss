@@ -1,5 +1,6 @@
-@import '../../assets/styles/_vars';
+@import "../../assets/styles/_vars";
 
 .main {
   @include display-flex-center();
-};
+  z-index: 1;
+}

@@ -62,7 +62,7 @@ const AddTask = () => {
     <Form
       handleRequestData={handleRequestData}
       components={components}
-      formType="addTask"
+      formType="Add Task"
     />
   );
 };

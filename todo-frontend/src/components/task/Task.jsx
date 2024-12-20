@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 import { useUtils } from "../../context/Utils";
 
-
 const Task = ({ task }) => {
   const { state, dispatch } = useUtils();
   const URL = state.serverUrl;
   const navigate = useNavigate();
 
-
   const [className, setClassName] = useState(styles.task);
+  const [toggled, setToggled] = useState(false);
 
   useEffect(() => {
     setClassName(task.completed ? styles.taskCompleted : styles.task);
@@ -36,6 +35,16 @@ const Task = ({ task }) => {
         }
       );
       console.log(data);
+      const taskIndex = state.todoList.indexOf(task);
+      const updatedTask = state.todoList.splice(taskIndex, 1);
+      const todoList = task.completed
+        ? [...state.todoList, ...updatedTask]
+        : [...updatedTask, ...state.todoList];
+
+      dispatch({
+        type: "setTodoList",
+        payload: todoList,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -59,10 +68,18 @@ const Task = ({ task }) => {
   };
 
   const editTask = () => {
-    dispatch({
-      type: "toggleEditTask",
-      payload: task.id,
-    });
+    if (state.toggle.editTask.value) {
+      dispatch({
+        type: "toggleEditTask",
+        payload: { value: false, taskId: undefined },
+      });
+    }
+    setTimeout(() => {
+      dispatch({
+        type: "toggleEditTask",
+        payload: { value: true, taskId: task.id },
+      });
+    }, 1);
   };
 
   const detailTask = () =>

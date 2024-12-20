@@ -71,9 +71,7 @@ const reducer = (state, action) => {
         ...state,
         toggle: {
           addTask: false,
-          editTask: !state.toggle.editTask.value
-            ? { value: true, taskId: action.payload }
-            : { value: false, taskId: undefined },
+          editTask: { value: action.payload.value, taskId: action.payload.taskId }
         },
       };
     }

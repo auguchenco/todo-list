@@ -1,36 +1,33 @@
-import { useState } from "react";
 import DefaultPage from "../../components/defaultPage/DefaultPage";
 import { useUtils } from "../../context/Utils";
-import styles from "./profile.styles.module.scss";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Profile = () => {
   const { dispatch, state } = useUtils();
-  const [completedTasks, setCompletedTasks] = useState(
-    state.todoList.filter((task) => task.completed === true).length
-  );
-  const totalTasks = state.todoList.length;
-  const progress = (completedTasks / totalTasks) * 100;
-  return (
-    <DefaultPage>
-      <div className={styles.profileContainer}>
-      <h1 className={styles.profileTitle}>User Profile</h1>
-        <div className={styles.profileDetails}>
-          <p className={styles.username}>
-            Username: <span className={styles.highlight}>JohnDoe</span>
-          </p>
-          <p className={styles.taskProgress}>
-            Completed Tasks: {completedTasks} / {totalTasks}
-          </p>
-          <div className={styles.progressBarContainer}>
-            <div
-              className={styles.progressBar}
-              style={{ width: `${progress}%` }}
-            ></div>
-          </div>
-        </div>
-      </div>
-    </DefaultPage>
-  );
+
+  useEffect(() => {
+    const getTodoList = async () => {
+      try {
+        let url = `${state.serverUrl}/todos`;
+
+        const { data } = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        });
+
+        dispatch({ type: "setTodoList", payload: data.data || [] });
+      } catch (error) {
+        console.error("Error trying to get the todo list\n", error);
+        dispatch({ type: "setTodoList", payload: [] });
+      }
+    };
+    getTodoList();
+    console.log("getTodoList");
+  }, []);
+
+  return <DefaultPage>PERFIL</DefaultPage>;
 };
 
 export default Profile;

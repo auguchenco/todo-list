@@ -2,10 +2,17 @@ import styles from "./form.styles.module.scss";
 import axios from "axios";
 import { Button, Input } from "../formElements/FormElements";
 import { useUtils } from "../../context/Utils";
+import { useEffect, useState } from "react";
 
 const Form = ({ handleRequestData, components, formType }) => {
   const { state } = useUtils();
   const URL = state.serverUrl;
+  const [comp, setComp] = useState(components);
+
+  useEffect(() => {
+    setComp(components);
+  }, [components]);
+
   const submitResult = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -16,7 +23,7 @@ const Form = ({ handleRequestData, components, formType }) => {
     });
 
     const { req, func } = handleRequestData(URL, result);
-    
+
     let request;
     switch (req.type) {
       case "GET":
@@ -31,7 +38,7 @@ const Form = ({ handleRequestData, components, formType }) => {
       case "DELETE":
         request = axios.delete;
         break;
-    
+
       default:
         break;
     }
@@ -55,7 +62,8 @@ const Form = ({ handleRequestData, components, formType }) => {
       }
     >
       <form onSubmit={submitResult}>
-        {components.inputs.map((input) => (
+        {formType && <h3>{`${formType}`}</h3>}
+        {comp.inputs.map((input) => (
           <Input
             key={input.id}
             input={input}
@@ -64,7 +72,7 @@ const Form = ({ handleRequestData, components, formType }) => {
         ))}
 
         <div className={styles.buttonsContainer}>
-          {components.buttons.map((button) => (
+          {comp.buttons.map((button) => (
             <Button key={button.id} button={button} />
           ))}
         </div>

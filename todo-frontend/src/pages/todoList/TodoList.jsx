@@ -6,6 +6,7 @@ import { useUtils } from "../../context/Utils";
 import { useEffect } from "react";
 import axios from "axios";
 import EditTask from "../../components/editTask/EditTask";
+import UserCard from "../../components/userCard/UserCard";
 
 const TodoList = () => {
   const { state, dispatch } = useUtils();
@@ -42,6 +43,7 @@ const TodoList = () => {
       }
     };
     getTodoList();
+    console.log("getTodoList");
   }, [state.toggle]);
 
   return (
@@ -54,6 +56,7 @@ const TodoList = () => {
         </ul>
         {state.toggle.addTask && <AddTask />}
         {state.toggle.editTask.value && <EditTask />}
+        {!state.toggle.addTask && !state.toggle.editTask.value && <UserCard />}
       </section>
     </DefaultPage>
   );

@@ -1,20 +1,6 @@
 @import "../../assets/styles/_vars";
 
-@keyframes diplayForm {
-  0% {
-    top: -265px;
-    opacity: 0;
-  }
-  50% {
-    top: 50vh;
-    opacity: 1;
-  }
-  100% {
-    top: 50vh;
-    opacity: 1;
-  }
-}
-@keyframes diplayFormTask {
+@keyframes diplayUserCard {
   0% {
     top: -265px;
     opacity: 0;
@@ -50,18 +36,27 @@
   }
 }
 
-.formContainer {
-  transform: translateX(-50%) translateY(-50%);
-  animation: diplayForm 2s ease-out forwards;
-  left: 50% !important;
-}
-
-.formContainerTask {
+.userCardContainer {
+  animation: diplayUserCard 2s ease-out forwards;
+  position: fixed;
+  top: -265px;
+  z-index: 1;
+  opacity: 0;
   width: 25vw;
   transform: translateX(-50%);
   left: 85% !important;
-  animation: diplayFormTask 2s ease-out forwards;
-  form {
+  .userCard {
+    @include display-flex-center();
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 1;
+    padding: 1.5rem;
+    background-color: #000;
+    box-shadow: 0 0 10px 5px $primary-color;
+    border: 2px solid $primary-color;
+    border-radius: 1rem;
+    color: $primary-color;
+
     h3 {
       color: $primary-color;
       font-size: 1.5rem;
@@ -74,31 +69,31 @@
         cursor: pointer !important;
       }
     }
-  }
-}
-
-.formContainer,
-.formContainerTask {
-  position: fixed;
-  top: -265px;
-  z-index: 1;
-  opacity: 0;
-
-  form {
-    @include display-flex-center();
-    flex-direction: column;
-    gap: 1.5rem;
-    z-index: 1;
-    padding: 1.5rem;
-    background-color: #000;
-    box-shadow: 0 0 10px 5px $primary-color;
-    border: 2px solid $primary-color;
-    border-radius: 1rem;
-
-    .buttonsContainer {
-      @include display-flex-center();
+    .infoContainer {
       width: 100%;
-      gap: 1rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      p {
+        font-weight: bold;
+      }
+      span {
+        color: $secondary-color;
+      }
+    }
+    .progressBarContainer {
+      background-color: #ff00ff90;
+      display: flex;
+      width: 100%;
+      border-radius: 50px;
+      .progressBarCompleted {
+        height: 10px;
+        background-color: $primary-color;
+        border-radius: 50px;
+        transition: width 0.5s ease-in-out;
+        box-shadow: 0 0 10px $primary-color;
+        overflow: hidden;
+      }
     }
   }
 }

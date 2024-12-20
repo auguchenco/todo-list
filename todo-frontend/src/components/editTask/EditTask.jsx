@@ -1,12 +1,19 @@
+import { useState } from "react";
 import { useUtils } from "../../context/Utils";
 import Form from "../form/Form";
+import { useEffect } from "react";
 
 const EditTask = () => {
   const { state, dispatch } = useUtils();
 
-  const task = state.todoList.find(
-    (task) => task.id === state.toggle.editTask.taskId
+  const [task, setTask] = useState(
+    state.todoList.find((task) => task.id === state.toggle.editTask.taskId)
   );
+  useEffect(() => {
+    setTask(
+      state.todoList.find((task) => task.id === state.toggle.editTask.taskId)
+    );
+  }, [state.toggle.editTask.taskId]);
 
   const handleRequestData = (URL, result) => {
     const req = {
@@ -24,7 +31,11 @@ const EditTask = () => {
         console.log(data);
       },
       eFunc: (form) => {},
-      fFunc: () => dispatch({ type: "toggleEditTask", payload: undefined }),
+      fFunc: () =>
+        dispatch({
+          type: "toggleEditTask",
+          payload: { value: false, taskId: undefined },
+        }),
     };
     return { req, func };
   };
@@ -58,7 +69,11 @@ const EditTask = () => {
         id: "cancelEditTask",
         type: "reset",
         className: "button",
-        onClick: () => dispatch({ type: "toggleEditTask", payload: undefined }),
+        onClick: () =>
+          dispatch({
+            type: "toggleEditTask",
+            payload: { value: false, taskId: undefined },
+          }),
         text: "Cancel",
       },
     ],
@@ -68,7 +83,7 @@ const EditTask = () => {
     <Form
       handleRequestData={handleRequestData}
       components={components}
-      formType="editTask"
+      formType="Edit Task"
     />
   );
 };

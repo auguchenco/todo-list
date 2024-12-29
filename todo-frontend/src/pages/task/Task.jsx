@@ -23,7 +23,7 @@ const Task = () => {
           }
         );
         setTask(data.data);
-        console.log(task);
+        console.log("Task", data.data);
       } catch (error) {
         console.error(error);
       }

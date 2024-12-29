@@ -2,7 +2,7 @@
 
 ## DOWNLOAD
 
-To get started with the application, you must download the repository from <https://github.com/auguchenco/todo-list>.
+To get started with the application, you must download the repository from <https://github.com/auguchenco/todo-list>
 
 ## BACKEND
 
